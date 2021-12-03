@@ -4,9 +4,9 @@ interface ICounterState {
   count: number;
 }
 
-const initialState: ICounterState = {
+const initialState = {
   count: 0,
-};
+} as ICounterState;
 
 export const counterSlice = createSlice({
   name: 'counter',
