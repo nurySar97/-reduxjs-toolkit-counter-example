@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from './reducers/counter.reducer'
 import todoReducer from './reducers/todo.reducer';
+import switchReducer from './reducers/switch.reducer';
 
 export const store = configureStore({
     reducer: {
         counter: counterReducer,
-        todo: todoReducer
+        todo: todoReducer,
+        switch: switchReducer
     },
     devTools: true,
 });

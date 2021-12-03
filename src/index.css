@@ -18,6 +18,10 @@ body {
   padding: 1rem;
 }
 
+.switch__header {
+  text-align: center;
+}
+
 .counter {
   text-align: center;
 }
@@ -46,3 +50,4 @@ body {
 .text-align-center {
   text-align: center;
 }
+

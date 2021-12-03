@@ -2,7 +2,8 @@ import { useRef, useState } from 'react';
 import { useAppSelector, useAppDispatch } from './store/hooks'
 
 import { decrement, increment, incrementByAmount } from './store/reducers/counter.reducer'
-import { getCount, getTodos } from './store/selectors';
+import { isOpenFalse, isOpenTrue } from './store/reducers/switch.reducer';
+import { getCount, getIsOpen, getTodos } from './store/selectors';
 import { getTodoThunk } from './store/thunks';
 
 function App() {
@@ -10,7 +11,9 @@ function App() {
   const [value, setValue] = useState<string>("0")
   const count = useAppSelector(getCount)
   const todos = useAppSelector(getTodos)
+  const isOpen = useAppSelector(getIsOpen);
   const dispatch = useAppDispatch()
+
 
   const incrementHandler = () => {
     dispatch(increment())
@@ -29,8 +32,42 @@ function App() {
     ++counter.current
   }
 
+  const switchTurnOnHandler = () => {
+    dispatch(isOpenTrue(true))
+  }
+
+  const switchTurnOffHandler = () => {
+    dispatch(isOpenFalse(false))
+  }
+
   return (
     <div className="wrapper">
+      <div className="switch">
+        <div className="switch__header">
+          <button
+            onClick={switchTurnOnHandler}
+            disabled={isOpen}
+            children="On"
+          />
+
+          <button
+            onClick={switchTurnOffHandler}
+            disabled={!isOpen}
+            children='Off'
+          />
+        </div>
+        {
+          isOpen && <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Vel architecto repellendus voluptatum et enim quae id!
+            A molestias ex nisi ad animi vel minima reiciendis earum numquam maxime! Eaque, provident?
+            Laboriosam hic qui suscipit quam veritatis, beatae nostrum inventore ipsa officia natus quo commodi,
+            at nemo minus ut recusandae incidunt assumenda velit quis! Expedita laborum exercitationem,
+            magnam incidunt iure reiciendis.
+          </p>
+        }
+      </div>
+
       <div className="counter">
         <h1>Count {count}</h1>
         <p><button onClick={incrementHandler}>Increment</button></p>
@@ -39,8 +76,6 @@ function App() {
         <h2>Increase By Amount</h2>
         <p><input value={value} onChange={e => setValue(e.target.value)} type="number" /></p>
         <p><button onClick={incrementByAmountHandler}>Increase</button></p>
-
-
       </div>
       <hr />
 
