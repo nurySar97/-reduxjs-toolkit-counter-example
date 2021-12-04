@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useAppSelector, useAppDispatch } from './store/hooks'
+import { useDispatch, useSelector } from 'react-redux';
 
 import { decrement, increment, incrementByAmount } from './store/reducers/counter.reducer'
 import { isOpenFalse, isOpenTrue } from './store/reducers/switch.reducer';
@@ -9,10 +9,11 @@ import { getTodoThunk } from './store/thunks';
 function App() {
   const counter = useRef<number>(1)
   const [value, setValue] = useState<string>("0")
-  const count = useAppSelector(getCount)
-  const todos = useAppSelector(getTodos)
-  const isOpen = useAppSelector(getIsOpen);
-  const dispatch = useAppDispatch()
+
+  const count = useSelector(getCount)
+  const todos = useSelector(getTodos)
+  const isOpen = useSelector(getIsOpen);
+  const dispatch = useDispatch()
 
 
   const incrementHandler = () => {
